@@ -260,6 +260,19 @@ const schemaData = {
 
     <!-- Google Structured Data JSON-LD -->
     <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
+
+    <!-- Google Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DRP99R17Q5"
+    ></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-DRP99R17Q5");
+    </script>
   </head>
   <body
     class="bg-tech-black text-white antialiased selection:bg-neon-green selection:text-tech-black min-h-screen flex flex-col"
