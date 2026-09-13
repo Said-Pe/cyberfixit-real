@@ -1,6 +1,0 @@
-# Robots.txt for CyberFix-It
-User-agent: *
-Allow: /
-
-# Sitemaps
-Sitemap: https://cyberfixit.com/sitemap.xml
