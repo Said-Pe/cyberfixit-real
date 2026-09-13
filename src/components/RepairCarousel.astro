@@ -61,14 +61,14 @@ const slides: RepairSlide[] = [
           aria-roledescription="slide"
           aria-label={`${slide.title} (${index + 1} de ${slides.length})`}
         >
-          <!-- Componente Image de Astro: Comprime y redimensiona a 800px max -->
+          <!-- Componente Image de Astro: Ajustado a 450px para viewport móvil -->
           <Image
             src={slide.image}
             alt={slide.title}
-            width={800}
-            height={500}
+            width={450}
+            height={300}
             format="webp"
-            quality={75}
+            quality={65}
             loading={index === 0 ? 'eager' : 'lazy'}
             fetchpriority={index === 0 ? 'high' : 'auto'}
             class="h-full w-full object-cover"
