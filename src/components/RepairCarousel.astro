@@ -1,32 +1,39 @@
 ---
+import { Image } from 'astro:assets';
 import { WHATSAPP_URL } from '../config';
+
+// Importación directa de imágenes para que Astro & Sharp las optimicen automáticamente
+import img1 from '../../public/reparaciones/1.webp';
+import imgPlaca from '../../public/reparaciones/placa.webp';
+import imgMantenimiento from '../../public/reparaciones/mantenimiento.webp';
+import imgPs4 from '../../public/reparaciones/ps4.webp';
 
 interface RepairSlide {
   id: number;
   title: string;
-  image?: string;
+  image: ImageMetadata;
 }
 
 const slides: RepairSlide[] = [
   {
     id: 1,
     title: 'Mantenimiento Térmico & GPU Gamer',
-    image: '/reparaciones/1.webp',
+    image: img1,
   },
   {
     id: 2,
     title: 'Reparación de Pantallas & Placa Base',
-    image: '/reparaciones/placa.webp', 
+    image: imgPlaca, 
   },
   {
     id: 3,
     title: 'Sustitución Puerto HDMI & Limpieza',
-    image: '/reparaciones/mantenimiento.webp',
+    image: imgMantenimiento,
   },
   {
     id: 4,
     title: 'Cambio de Módulo OLED & Baterías',
-    image: '/reparaciones/ps4.webp',
+    image: imgPs4,
   },
 ];
 ---
@@ -54,30 +61,18 @@ const slides: RepairSlide[] = [
           aria-roledescription="slide"
           aria-label={`${slide.title} (${index + 1} de ${slides.length})`}
         >
-          {slide.image ? (
-            <!-- Únicamente la Foto Optimizada -->
-            <img
-              src={slide.image}
-              alt={slide.title}
-              width="800"
-              height="500"
-              loading={index === 0 ? 'eager' : 'lazy'}
-              fetchpriority={index === 0 ? 'high' : 'auto'}
-              decoding={index === 0 ? 'sync' : 'async'}
-              class="h-full w-full object-cover"
-            />
-          ) : (
-            <!-- Mensaje simple cuando no hay foto -->
-            <div class="flex h-full w-full flex-col items-center justify-center p-6 text-center bg-[#0B0B10]">
-              <div class="flex h-12 w-12 items-center justify-center rounded-full bg-white/5 border border-white/10 mb-3 text-zinc-400">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V7.5z" />
-                </svg>
-              </div>
-              <p class="text-xs font-mono text-zinc-400">Foto no disponible</p>
-              <p class="mt-1 text-xs text-zinc-500">{slide.title}</p>
-            </div>
-          )}
+          <!-- Componente Image de Astro: Comprime y redimensiona a 800px max -->
+          <Image
+            src={slide.image}
+            alt={slide.title}
+            width={800}
+            height={500}
+            format="webp"
+            quality={75}
+            loading={index === 0 ? 'eager' : 'lazy'}
+            fetchpriority={index === 0 ? 'high' : 'auto'}
+            class="h-full w-full object-cover"
+          />
         </div>
       ))}
 
