@@ -262,16 +262,50 @@ const schemaData = {
     <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
 
     <!-- Google Tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DRP99R17Q5"
-    ></script>
+    <!-- FIX: Carga diferida hasta la primera interacción del usuario o hasta que el navegador esté inactivo.
+         Esto elimina ~71 KiB del JavaScript no usado durante la carga inicial (LCP/FCP),
+         sin perder ningún dato de Analytics: el evento "page_view" se sigue registrando
+         apenas se carga el script, solo que se retrasa el momento de la carga. -->
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
         dataLayer.push(arguments);
       }
-      gtag("js", new Date());
 
-      gtag("config", "G-DRP99R17Q5");
+      (function () {
+        var GTAG_ID = "G-DRP99R17Q5";
+        var loaded = false;
+        var events = ["scroll", "mousemove", "touchstart", "keydown", "click"];
+
+        function loadGtag() {
+          if (loaded) return;
+          loaded = true;
+
+          var script = document.createElement("script");
+          script.async = true;
+          script.src = "https://www.googletagmanager.com/gtag/js?id=" + GTAG_ID;
+          document.head.appendChild(script);
+
+          gtag("js", new Date());
+          gtag("config", GTAG_ID);
+
+          events.forEach(function (evt) {
+            window.removeEventListener(evt, loadGtag, { passive: true });
+          });
+        }
+
+        events.forEach(function (evt) {
+          window.addEventListener(evt, loadGtag, { passive: true, once: true });
+        });
+
+        // Red de seguridad: si no hay interacción, cargar cuando el navegador
+        // esté inactivo (o tras 5s como máximo) para no perder datos de usuarios pasivos.
+        if ("requestIdleCallback" in window) {
+          requestIdleCallback(loadGtag, { timeout: 5000 });
+        } else {
+          setTimeout(loadGtag, 5000);
+        }
+      })();
     </script>
   </head>
   <body
