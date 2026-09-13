@@ -1,0 +1,130 @@
+---
+import { getWhatsAppUrl } from '../config';
+
+const services = [
+  {
+    icon: 'laptop',
+    title: 'Laptops & PC Gamer',
+    description: 'Diagnóstico y reparación de fallas electrónicas, pantallas rotas, bisagras dañadas, teclados y problemas de encendido en todas las marcas.',
+    tags: ['Pantallas IPS/OLED', 'Bisagras', 'Mantenimiento de GPU'],
+    whatsappMsg: 'Hola CyberFix-It, quiero cotizar la reparación de mi Laptop o PC Gamer 💻',
+  },
+  {
+    icon: 'thermal',
+    title: 'Mantenimiento Térmico Premium',
+    description: 'Limpieza profunda por ultrasonido, cambio de thermal pads y aplicación de pasta térmica de alto rendimiento (Thermal Grizzly / Arctic) para evitar thermal throttling.',
+    tags: ['Pasta Térmica Grizzly', 'Thermal Pads', 'Ventiladores'],
+    whatsappMsg: 'Hola CyberFix-It, quiero cotizar un Mantenimiento Térmico para mi equipo 🔥',
+  },
+  {
+    icon: 'console',
+    title: 'Consolas (PS5, Xbox, Switch)',
+    description: 'Especialistas en consolas: cambio de puerto HDMI 2.1, problemas de sobrecalentamiento, fuente de poder, lector de discos y reparación de drift en controles.',
+    tags: ['Puerto HDMI 2.1', 'Luz Azul PS5', 'Drift Sticks Hall Effect', 'Fuente de Poder'],
+    whatsappMsg: 'Hola CyberFix-It, quiero cotizar la reparación de mi Consola de Videojuegos 🎮',
+  },
+  {
+    icon: 'phone',
+    title: 'Celulares & Tablets (iPhone / Android)',
+    description: 'Reemplazo de pantallas originales, cambio de batería con 100% de salud, reparación de puertos de carga y solución a fallas por humedad o caídas.',
+    tags: ['Pantallas Originales', 'Baterías Nuevas', 'Pin de Carga USB-C', 'Microelectrónica'],
+    whatsappMsg: 'Hola CyberFix-It, quiero cotizar la reparación de mi Celular o Tablet 📱',
+  },
+  {
+    icon: 'upgrade',
+    title: 'Upgrades & Armado a Medida',
+    description: 'Potencia tu equipo actual con discos SSD NVMe ultra rápidos, memorias RAM DDR4/DDR5 y asesoría completa para armar la PC Gamer de tus sueños.',
+    tags: ['SSD NVMe Gen4', 'Memoria RAM', 'Cable Management', 'Optimización BIOS'],
+    whatsappMsg: 'Hola CyberFix-It, quiero cotizar Upgrades o Armado de PC Gamer 🚀',
+  },
+  {
+    icon: 'recovery',
+    title: 'Recuperación de Datos & Software',
+    description: 'Rescate forense de información en discos duros dañados, memorias USB y SSD. Eliminación de virus, optimización de Windows y respaldo seguro.',
+    tags: ['Discos Dañados','Eliminación Malware', 'Backup Seguro'],
+    whatsappMsg: 'Hola CyberFix-It, necesito recuperar datos o soporte de software 🛡️',
+  },
+];
+
+const icons: Record<string, string> = {
+  laptop:
+    '<path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6z" /><path d="M2 19h20" stroke-linecap="round" />',
+  thermal:
+    '<path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" /><path d="M11.5 12h2" stroke-linecap="round" />',
+  console:
+    '<rect x="2" y="6" width="20" height="12" rx="3" /><path d="M6 12h4M8 10v4M15 11h.01M17 13h.01" stroke-linecap="round" stroke-width="2" />',
+  phone:
+    '<rect x="6" y="2" width="12" height="20" rx="3" /><path d="M11 18h2" stroke-linecap="round" />',
+  upgrade:
+    '<path d="M12 19V5M5 12l7-7 7 7" stroke-linecap="round" stroke-linejoin="round" />',
+  recovery:
+    '<path d="M12 3v4M12 17v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M3 12h4M17 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" /><circle cx="12" cy="12" r="3" />',
+};
+---
+
+<section id="servicios" class="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+  <div class="mx-auto max-w-2xl text-center" data-reveal>
+    <h2 class="mt-4 font-display text-3xl font-black text-white sm:text-4xl lg:text-5xl">
+      Nuestros <span class="text-neon-green text-glow">Servicios</span>
+    </h2>
+    <p class="mt-4 text-base leading-relaxed text-white/70 sm:text-lg">
+      Reparaciones garantizadas con diagnóstico sin costo y repuestos de máxima calidad para todo tu equipamiento.
+    </p>
+  </div>
+
+  <div class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    {services.map((service, i) => (
+      <article
+        data-reveal
+        style={`transition-delay: ${i * 60}ms`}
+        class="group relative flex flex-col justify-between rounded-xl border border-white/10 bg-card-bg p-6 sm:p-7 transition-all duration-300 hover:border-neon-green/60 hover:bg-card-bg/90 hover:shadow-[0_0_25px_rgba(56,239,157,0.15)]"
+      >
+        <div>
+          <!-- Cabecera de la tarjeta con icono y badge -->
+          <div class="flex items-center justify-between">
+            <div class="flex h-12 w-12 items-center justify-center rounded-lg border border-neon-green/30 bg-dark-purple/40 text-neon-green transition-transform duration-300 group-hover:scale-110 group-hover:border-neon-green">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6" set:html={icons[service.icon]} />
+            </div>
+            <span class="font-mono text-xs text-white/40 group-hover:text-neon-green transition-colors">
+              0{i + 1}
+            </span>
+          </div>
+
+          <!-- Título y descripción -->
+          <h3 class="mt-5 font-display text-lg font-bold text-white group-hover:text-neon-green transition-colors">
+            {service.title}
+          </h3>
+          <p class="mt-2.5 text-sm leading-relaxed text-white/65">
+            {service.description}
+          </p>
+
+          <!-- Etiquetas de fallas comunes / componentes -->
+          <div class="mt-4 flex flex-wrap gap-1.5">
+            {service.tags.map((tag) => (
+              <span class="inline-block rounded bg-white/5 px-2 py-0.5 text-[11px] font-medium text-white/70 border border-white/5">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <!-- Botón directo de cotización específica para este servicio -->
+        <div class="mt-6 pt-5 border-t border-white/10">
+          <a
+            href={getWhatsAppUrl(service.whatsappMsg)}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-neon-green/30 bg-neon-green/10 px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-neon-green transition-all duration-200 hover:bg-neon-green hover:text-tech-black hover:shadow-[0_0_15px_rgba(56,239,157,0.4)] active:scale-[0.98]"
+            aria-label={`Cotizar ${service.title} por WhatsApp`}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.33 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2Z"/>
+            </svg>
+            Cotizar por WhatsApp
+          </a>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>
+

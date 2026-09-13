@@ -1,0 +1,255 @@
+---
+import '../styles/global.css';
+import { SITE } from '../config';
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  image?: string;
+}
+
+const {
+  title = SITE.seo.defaultTitle,
+  description = SITE.seo.defaultDescription,
+  canonical = SITE.url,
+  image = `${SITE.url}/logo.png`,
+} = Astro.props;
+
+// Schema.org Structured Data (JSON-LD) para SEO Local y Rich Snippets de Google
+const schemaData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["LocalBusiness", "ComputerRepairService", "ElectronicsRepairShop"],
+      "@id": `${SITE.url}/#business`,
+      "name": SITE.name,
+      "alternateName": SITE.legalName,
+      "url": SITE.url,
+      "logo": `${SITE.url}/logo.png`,
+      "image": `${SITE.url}/logo.png`,
+      "description": description,
+      "telephone": SITE.phoneRaw,
+      "email": SITE.email,
+      "priceRange": "$$",
+      "currenciesAccepted": "USD",
+      "paymentAccepted": "Cash, Bank Transfer, Yappy",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": SITE.address,
+        "addressLocality": SITE.city,
+        "addressCountry": SITE.countryCode
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": SITE.geo.latitude,
+        "longitude": SITE.geo.longitude
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          "opens": "08:00",
+          "closes": "19:00"
+        }
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Servicios de Reparación y Soporte Técnico",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Reparación de Laptops y PC Gamer",
+              "description": "Diagnóstico, reemplazo de componentes, microelectrónica y optimización de hardware."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Mantenimiento Térmico Líquido y Pasta Térmica",
+              "description": "Limpieza profunda por ultrasonido, cambio de thermal pads y pasta térmica de alto rendimiento."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Reparación de Consolas de Videojuegos",
+              "description": "Reparación de puertos HDMI, fuente de poder, ventilación y reballing en PS5, Xbox y Switch."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Reparación de Celulares y Tablets",
+              "description": "Cambio de pantallas OLED/LCD, batería original, pin de carga y fallas de placa."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Recuperación de Datos y Respaldo",
+              "description": "Recuperación forense de discos dañados, formateados o corruptos con total confidencialidad."
+            }
+          }
+        ]
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "reviewCount": "127",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${SITE.url}/#faq`,
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿El diagnóstico inicial tiene algún costo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, en CyberFix-It el diagnóstico inicial es 100% sin costo. Revisamos tu equipo y te entregamos un presupuesto detallado antes de realizar cualquier intervención."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto tiempo demora la reparación de un equipo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La mayoría de diagnósticos se entregan en menos de 24 horas. Reparaciones comunes (pantallas, mantenimiento térmico, software) se resuelven en 24 a 48 horas con stock disponible."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Ofrecen garantía por escrito?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, absolutamente. Todas nuestras reparaciones y componentes instalados incluyen un certificado de garantía por escrito de 30 a 90 días."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Ofrecen servicio a domicilio o retiro de equipos?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, contamos con servicio express de retiro y entrega segura a domicilio en toda la ciudad, además de recepción presencial en nuestro taller."
+          }
+        }
+      ]
+    }
+  ]
+};
+---
+
+<!doctype html>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    
+    <!-- Metas principales SEO -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content={SITE.seo.keywords} />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="author" content={SITE.name} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Meta Geo / SEO Local -->
+    <meta name="geo.region" content={SITE.countryCode} />
+    <meta name="geo.placename" content={SITE.city} />
+    <meta name="geo.position" content={`${SITE.geo.latitude};${SITE.geo.longitude}`} />
+    <meta name="ICBM" content={`${SITE.geo.latitude}, ${SITE.geo.longitude}`} />
+
+    <!-- Favicon e iconos móviles -->
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/logo.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#0A0A0E" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <!-- Open Graph / Redes Sociales (Facebook, WhatsApp, LinkedIn) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:alt" content="CyberFix-It Laboratorio Tecnológico" />
+    <meta property="og:locale" content="es_PA" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonical} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+
+    <!-- Tipografías optimizadas con display=swap -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Google Structured Data JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
+  </head>
+  <body class="bg-tech-black text-white antialiased selection:bg-neon-green selection:text-tech-black min-h-screen flex flex-col">
+    <!-- Accesibilidad: Saltar al contenido principal -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-md focus:bg-neon-green focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-tech-black focus:shadow-lg"
+    >
+      Saltar al contenido principal
+    </a>
+
+    <slot />
+
+    <!-- Script ligero para animación progresiva en scroll optimizado para móviles -->
+    <script>
+      const initReveal = () => {
+        const revealElements = document.querySelectorAll('[data-reveal]');
+        if (!('IntersectionObserver' in window)) {
+          revealElements.forEach(el => el.classList.add('is-visible'));
+          return;
+        }
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { 
+            threshold: 0.08, 
+            rootMargin: '0px 0px -40px 0px' 
+          }
+        );
+
+        revealElements.forEach((el) => observer.observe(el));
+      };
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initReveal);
+      } else {
+        initReveal();
+      }
+    </script>
+  </body>
+</html>

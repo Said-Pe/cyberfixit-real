@@ -1,0 +1,204 @@
+---
+import { WHATSAPP_URL } from '../config';
+
+interface RepairSlide {
+  id: number;
+  title: string;
+  image?: string;
+}
+
+const slides: RepairSlide[] = [
+  {
+    id: 1,
+    title: 'Mantenimiento Térmico & GPU Gamer',
+    image: '/reparaciones/1.webp',
+  },
+  {
+    id: 2,
+    title: 'Reparación de Pantallas & Placa Base',
+    image: '/reparaciones/placa.webp', 
+  },
+  {
+    id: 3,
+    title: 'Sustitución Puerto HDMI & Limpieza',
+    image: '/reparaciones/mantenimiento.webp',
+  },
+  {
+    id: 4,
+    title: 'Cambio de Módulo OLED & Baterías',
+    image: '/reparaciones/ps4.webp',
+  },
+];
+---
+
+<div class="relative mx-auto max-w-lg lg:max-w-none">
+  <!-- Contenedor Principal del Carrusel Minimalista -->
+  <div
+    id="repair-carousel"
+    class="relative overflow-hidden rounded-2xl border border-white/10 bg-[#0E0E14] p-2 sm:p-3"
+    role="region"
+    aria-roledescription="carousel"
+    aria-label="Galería de fotos de reparaciones realizadas"
+  >
+    <!-- Área de Fotos -->
+    <div class="relative aspect-[4/3] sm:aspect-[16/10] w-full overflow-hidden rounded-xl bg-[#08080C]">
+      {slides.map((slide, index) => (
+        <div
+          class={`carousel-slide absolute inset-0 transition-opacity duration-500 ease-in-out ${
+            index === 0
+              ? 'opacity-100 pointer-events-auto z-10'
+              : 'opacity-0 pointer-events-none z-0'
+          }`}
+          data-slide-index={index}
+          role="group"
+          aria-roledescription="slide"
+          aria-label={`${slide.title} (${index + 1} de ${slides.length})`}
+        >
+          {slide.image ? (
+            <!-- Únicamente la Foto -->
+            <img
+              src={slide.image}
+              alt={slide.title}
+              class="h-full w-full object-cover"
+              loading={index === 0 ? 'eager' : 'lazy'}
+            />
+          ) : (
+            <!-- Mensaje simple cuando no hay foto -->
+            <div class="flex h-full w-full flex-col items-center justify-center p-6 text-center bg-[#0B0B10]">
+              <div class="flex h-12 w-12 items-center justify-center rounded-full bg-white/5 border border-white/10 mb-3 text-zinc-400">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V7.5z" />
+                </svg>
+              </div>
+              <p class="text-xs font-mono text-zinc-400">Foto no disponible</p>
+              <p class="mt-1 text-xs text-zinc-500">{slide.title}</p>
+            </div>
+          )}
+        </div>
+      ))}
+
+      <!-- Botón Anterior -->
+      <button
+        type="button"
+        id="carousel-prev"
+        aria-label="Foto anterior"
+        class="absolute left-3 top-1/2 -translate-y-1/2 z-20 flex h-8 w-8 items-center justify-center rounded-full bg-black/40 text-white/80 backdrop-blur-sm transition-all hover:bg-black/70 hover:text-white"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+
+      <!-- Botón Siguiente -->
+      <button
+        type="button"
+        id="carousel-next"
+        aria-label="Foto siguiente"
+        class="absolute right-3 top-1/2 -translate-y-1/2 z-20 flex h-8 w-8 items-center justify-center rounded-full bg-black/40 text-white/80 backdrop-blur-sm transition-all hover:bg-black/70 hover:text-white"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Puntos de navegación sutiles -->
+    <div class="mt-3 flex items-center justify-center gap-1.5">
+      {slides.map((_, idx) => (
+        <button
+          type="button"
+          data-dot-index={idx}
+          aria-label={`Ir a foto ${idx + 1}`}
+          class={`carousel-dot h-1.5 rounded-full transition-all duration-300 ${
+            idx === 0 ? 'w-4 bg-white/80' : 'w-1.5 bg-white/20 hover:bg-white/40'
+          }`}
+        />
+      ))}
+    </div>
+
+    <!-- Botón CTA WhatsApp Minimalista -->
+    <a
+      href={WHATSAPP_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="mt-3 flex w-full items-center justify-center gap-2 rounded-lg bg-white/5 border border-white/10 px-4 py-2.5 text-xs font-medium text-zinc-200 transition-all hover:bg-white/10 hover:text-white"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-emerald-400" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.33 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2Z"/>
+      </svg>
+      <span>Cotizar reparación vía WhatsApp</span>
+    </a>
+  </div>
+</div>
+
+<script>
+  const carouselEl = document.getElementById('repair-carousel');
+  const slides = document.querySelectorAll<HTMLElement>('.carousel-slide');
+  const dots = document.querySelectorAll<HTMLButtonElement>('.carousel-dot');
+  const prevBtn = document.getElementById('carousel-prev');
+  const nextBtn = document.getElementById('carousel-next');
+
+  let currentIndex = 0;
+  let autoplayInterval: ReturnType<typeof setInterval> | null = null;
+  const slideCount = slides.length;
+  const AUTOPLAY_DELAY = 4000;
+
+  function updateCarousel(newIndex: number) {
+    if (slideCount === 0) return;
+
+    currentIndex = (newIndex + slideCount) % slideCount;
+
+    slides.forEach((slide, idx) => {
+      if (idx === currentIndex) {
+        slide.classList.remove('opacity-0', 'pointer-events-none', 'z-0');
+        slide.classList.add('opacity-100', 'pointer-events-auto', 'z-10');
+      } else {
+        slide.classList.remove('opacity-100', 'pointer-events-auto', 'z-10');
+        slide.classList.add('opacity-0', 'pointer-events-none', 'z-0');
+      }
+    });
+
+    dots.forEach((dot, idx) => {
+      if (idx === currentIndex) {
+        dot.classList.remove('w-1.5', 'bg-white/20');
+        dot.classList.add('w-4', 'bg-white/80');
+      } else {
+        dot.classList.remove('w-4', 'bg-white/80');
+        dot.classList.add('w-1.5', 'bg-white/20');
+      }
+    });
+  }
+
+  function nextSlide() { updateCarousel(currentIndex + 1); }
+  function prevSlide() { updateCarousel(currentIndex - 1); }
+
+  function startAutoplay() {
+    if (!autoplayInterval) autoplayInterval = setInterval(nextSlide, AUTOPLAY_DELAY);
+  }
+
+  function stopAutoplay() {
+    if (autoplayInterval) {
+      clearInterval(autoplayInterval);
+      autoplayInterval = null;
+    }
+  }
+
+  nextBtn?.addEventListener('click', () => { nextSlide(); stopAutoplay(); startAutoplay(); });
+  prevBtn?.addEventListener('click', () => { prevSlide(); stopAutoplay(); startAutoplay(); });
+
+  dots.forEach((dot) => {
+    dot.addEventListener('click', () => {
+      const idx = Number(dot.getAttribute('data-dot-index')) || 0;
+      updateCarousel(idx);
+      stopAutoplay();
+      startAutoplay();
+    });
+  });
+
+  carouselEl?.addEventListener('mouseenter', stopAutoplay);
+  carouselEl?.addEventListener('mouseleave', startAutoplay);
+  carouselEl?.addEventListener('touchstart', stopAutoplay, { passive: true });
+  carouselEl?.addEventListener('touchend', startAutoplay);
+
+  startAutoplay();
+</script>

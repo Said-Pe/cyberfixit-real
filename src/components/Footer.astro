@@ -1,0 +1,155 @@
+---
+import Logo from "./Logo.astro";
+import { SITE, WHATSAPP_URL } from "../config";
+
+const year = new Date().getFullYear();
+
+const servicesList = [
+  { href: "#servicios", label: "Reparación de Laptops & PC Gamer" },
+  { href: "#servicios", label: "Mantenimiento Térmico Líquido" },
+  { href: "#servicios", label: "Consolas PS5, Xbox & Switch" },
+  { href: "#servicios", label: "Pantallas y Baterías de Celulares" },
+  { href: "#servicios", label: "Upgrades & Ensambles a Medida" },
+  { href: "#servicios", label: "Recuperación Forense de Datos" },
+];
+
+const navList = [
+  { href: "#inicio", label: "Inicio" },
+  { href: "#servicios", label: "Todos los Servicios" },
+  { href: "#proceso", label: "¿Cómo funciona el servicio?" },
+  { href: "#testimonios", label: "Opiniones y Reseñas" },
+  { href: "#faq", label: "Preguntas Frecuentes" },
+  { href: "#ubicacion", label: "Ubicación y Horarios" },
+];
+---
+
+<footer class="border-t border-white/10 bg-[#08080C] pt-14 pb-24 sm:pb-14">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-12">
+      <!-- Columna 1: Marca y descripción -->
+      <div class="lg:col-span-4">
+        <Logo showTag={true} />
+        <p class="mt-4 max-w-sm text-sm leading-relaxed text-white/60">
+          Técnico especializado en reparación y mantenimiento de computadoras,
+          laptops gamer, consolas y smartphones con garantía por escrito.
+        </p>
+
+        <!-- Métodos de pago aceptados -->
+        <div class="mt-5">
+          <p
+            class="text-xs font-mono uppercase tracking-wider text-white/40 mb-2"
+          >
+            Métodos de pago aceptados:
+          </p>
+          <div
+            class="flex flex-wrap gap-2 text-[11px] text-white/70 font-medium"
+          >
+            <span class="rounded bg-white/5 px-2 py-1 border border-white/10"
+              >Yappy</span
+            >
+            <span class="rounded bg-white/5 px-2 py-1 border border-white/10"
+              >Efectivo</span
+            >
+            <span class="rounded bg-white/5 px-2 py-1 border border-white/10"
+              >Transferencia</span
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Columna 2: Servicios -->
+      <div class="lg:col-span-3">
+        <h3
+          class="font-display text-sm font-bold uppercase tracking-wider text-white"
+        >
+          Servicios Técnicos
+        </h3>
+        <ul class="mt-4 space-y-2.5 text-sm text-white/60">
+          {
+            servicesList.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  class="transition-colors hover:text-neon-green"
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Columna 3: Navegación rápida -->
+      <div class="lg:col-span-2">
+        <h3
+          class="font-display text-sm font-bold uppercase tracking-wider text-white"
+        >
+          Navegación
+        </h3>
+        <ul class="mt-4 space-y-2.5 text-sm text-white/60">
+          {
+            navList.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  class="transition-colors hover:text-neon-green"
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Columna 4: Contacto y Taller -->
+      <div class="lg:col-span-3">
+        <h3
+          class="font-display text-sm font-bold uppercase tracking-wider text-white"
+        >
+          Información y Ubicación
+        </h3>
+        <ul class="mt-4 space-y-2.5 text-sm text-white/60">
+          <li class="flex items-start gap-2">
+            <span class="text-neon-green">📍</span>
+            <span>{SITE.address}, {SITE.city}</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-neon-green">⏱️</span>
+            <span>{SITE.hours}</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-neon-green">💬</span>
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="font-bold text-neon-green hover:underline"
+            >
+              WhatsApp: {SITE.phoneDisplay}
+            </a>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-neon-green">✉️</span>
+            <a href={`mailto:${SITE.email}`} class="hover:text-neon-green">
+              {SITE.email}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="circuit-trace mt-12 mb-6"></div>
+
+    <div
+      class="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/40 text-center sm:text-left"
+    >
+      <p>
+        © {year}
+        {SITE.name}. Todos los derechos reservados. Especialistas en reparación
+        tecnológica.
+      </p>
+    </div>
+  </div>
+</footer>

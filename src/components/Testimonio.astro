@@ -1,0 +1,178 @@
+---
+const testimonials = [
+  {
+    name: 'Luis Williams',
+    device: 'iPhone 11',
+    initials: 'LW',
+    rating: 5,
+    quote: 'Trabajo de calidad y excelente servicio al cliente. Cien por ciento recomendable. Me salvaron el teléfono el mismo día.',
+  },
+  {
+    name: 'Radfrio Store',
+    device: 'PC Dell Trabajo',
+    initials: 'RS',
+    rating: 5,
+    quote: 'Muy buena atención, diagnóstico y respuesta precisa y concisa, sin tantas vueltas y demora. Recomendados al 100% para empresas y oficinas.',
+  },
+  {
+    name: 'Marisol Vega',
+    device: 'Laptop HP ProBook',
+    initials: 'MV',
+    rating: 5,
+    quote: 'Agradecida por la reparación de mi laptop. Tenía varias fallas complejas y el trabajo fue rápido, profesional y con muy buena atención. Todo con garantía.',
+  },
+  {
+    name: 'xDenox',
+    device: 'Laptop Gamer HP',
+    initials: 'XD',
+    rating: 5,
+    quote: 'El mejor servicio de reparación de laptops gamer. Bajaron las temperaturas más de 20 grados con el mantenimiento térmico y nada costoso.',
+  },
+  {
+    name: 'Aisha Rueda',
+    device: 'Samsung Galaxy A56',
+    initials: 'AR',
+    rating: 5,
+    quote: 'Excelente técnico de confianza. Siempre hace que mis equipos, tanto mi PC de escritorio como mi celular, anden al 100% de rendimiento.',
+  },
+  {
+    name: 'Killian Martínez García',
+    device: 'Laptop Cambio de Pantalla',
+    initials: 'KM',
+    rating: 5,
+    quote: 'Excelente servicio, sabe reparar desde celulares hasta laptops de alta gama. Muy amable, diagnóstico claro y sin sorpresas.',
+  },
+];
+---
+
+<section id="testimonios" class="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+  <div class="mx-auto max-w-2xl text-center" data-reveal>
+    <div class="inline-flex items-center gap-2 rounded-full border border-yellow-500/30 bg-yellow-500/10 px-3.5 py-1 text-xs font-semibold text-yellow-400">
+      <span>★ 5.0 en Google Reviews</span>
+    </div>
+    <h1 class="mt-4 font-display text-3xl font-black text-white sm:text-4xl lg:text-5xl">
+      Lo que dicen <span class="text-neon-green text-glow">Nuestros Clientes</span>
+    </h1>
+  </div>
+
+  <div class="relative mt-12" data-reveal>
+    <!-- Botón anterior (visible en sm y superior al costado) -->
+    <button
+      id="testi-prev"
+      type="button"
+      aria-label="Ver reseña anterior"
+      class="absolute -left-3 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-tech-black/90 text-white shadow-xl backdrop-blur-md transition-all hover:border-neon-green hover:text-neon-green hover:scale-110 sm:flex lg:-left-5"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="h-5 w-5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+      </svg>
+    </button>
+
+    <!-- Botón siguiente (visible en sm y superior al costado) -->
+    <button
+      id="testi-next"
+      type="button"
+      aria-label="Ver siguiente reseña"
+      class="absolute -right-3 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-tech-black/90 text-white shadow-xl backdrop-blur-md transition-all hover:border-neon-green hover:text-neon-green hover:scale-110 sm:flex lg:-right-5"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="h-5 w-5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+      </svg>
+    </button>
+
+    <!-- Carrusel de tarjetas con snap suave -->
+    <div
+      id="testi-track"
+      class="scrollbar-hide flex snap-x snap-mandatory gap-4 sm:gap-6 overflow-x-auto scroll-smooth py-2 px-1"
+    >
+      {testimonials.map((t) => (
+        <article
+          class="flex w-[86vw] max-w-[360px] sm:w-[360px] lg:w-[380px] shrink-0 snap-center flex-col justify-between rounded-xl border border-white/10 bg-card-bg p-6 transition-all duration-300 hover:border-neon-green/50 hover:bg-card-bg/90 hover:shadow-[0_0_20px_rgba(56,239,157,0.1)]"
+        >
+          <div>
+            <!-- Estrellas y Badge Verificado -->
+            <div class="flex items-center justify-between">
+              <div class="flex gap-1 text-yellow-400 text-sm" aria-hidden="true">
+                ★★★★★
+              </div>
+              <span class="inline-flex items-center gap-1 rounded-full bg-neon-green/10 px-2 py-0.5 text-[10px] font-semibold text-neon-green">
+                <svg class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                Verificado
+              </span>
+            </div>
+            <span class="sr-only">5 de 5 estrellas</span>
+
+            <!-- Cita del cliente -->
+            <p class="mt-4 text-sm leading-relaxed text-white/80 italic">
+              "{t.quote}"
+            </p>
+          </div>
+
+          <!-- Footer con datos del cliente y dispositivo reparado -->
+          <footer class="mt-6 pt-4 border-t border-white/10 flex items-center gap-3">
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-dark-purple/50 border border-neon-green/40 font-display text-xs font-bold text-neon-green">
+              {t.initials}
+            </div>
+            <div class="min-w-0">
+              <p class="text-sm font-bold text-white truncate">{t.name}</p>
+              <p class="text-xs text-neon-green/80 font-medium truncate">🔧 {t.device}</p>
+            </div>
+          </footer>
+        </article>
+      ))}
+    </div>
+
+    <!-- Controles táctiles móviles y puntos indicadores -->
+    <div class="mt-6 flex items-center justify-between sm:justify-center gap-4 px-2">
+      <!-- Botón móvil previo -->
+      <button
+        id="mobile-testi-prev"
+        type="button"
+        aria-label="Reseña anterior"
+        class="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-white/15 bg-white/5 text-white sm:hidden active:bg-neon-green active:text-tech-black"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+
+      <span class="text-xs text-white/50 font-mono">
+        Desliza para ver más opiniones ➔
+      </span>
+
+      <!-- Botón móvil siguiente -->
+      <button
+        id="mobile-testi-next"
+        type="button"
+        aria-label="Reseña siguiente"
+        class="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-white/15 bg-white/5 text-white sm:hidden active:bg-neon-green active:text-tech-black"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+  const track = document.getElementById('testi-track');
+  const prevBtn = document.getElementById('testi-prev');
+  const nextBtn = document.getElementById('testi-next');
+  const mPrevBtn = document.getElementById('mobile-testi-prev');
+  const mNextBtn = document.getElementById('mobile-testi-next');
+
+  function scrollByCard(direction: number) {
+    if (!track) return;
+    const card = track.querySelector('article');
+    const cardWidth = card ? card.getBoundingClientRect().width + 16 : 320;
+    track.scrollBy({ left: cardWidth * direction, behavior: 'smooth' });
+  }
+
+  prevBtn?.addEventListener('click', () => scrollByCard(-1));
+  nextBtn?.addEventListener('click', () => scrollByCard(1));
+  mPrevBtn?.addEventListener('click', () => scrollByCard(-1));
+  mNextBtn?.addEventListener('click', () => scrollByCard(1));
+</script>

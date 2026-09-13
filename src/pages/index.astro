@@ -1,0 +1,33 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Hero from '../components/Hero.astro';
+import Stats from '../components/Stats.astro';
+import Services from '../components/Services.astro';
+import Process from '../components/Process.astro';
+import Testimonios from '../components/Testimonio.astro'; 
+import FAQ from '../components/FAQ.astro';
+import Ubicacion from '../components/Ubicacion.astro';
+import CTABanner from '../components/CTABanner.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppFloat from '../components/WhatsAppFloat.astro';
+---
+
+<Layout>
+  <Navbar />
+
+  <main id="main-content" class="flex-1">
+    <Hero />
+    <Stats />
+    <Services />
+    <Process />
+    <Testimonios />
+    <FAQ />
+    <Ubicacion />
+    <CTABanner />
+  </main>
+
+  <Footer />
+  <WhatsAppFloat />
+</Layout>
+
