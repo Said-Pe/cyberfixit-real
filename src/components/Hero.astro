@@ -1,6 +1,8 @@
 ---
+import { Image } from "astro:assets";
 import { SITE, WHATSAPP_URL } from "../config";
 import RepairCarousel from "./RepairCarousel.astro";
+import bannerImg from "../../public/reparaciones/banner1.webp";
 ---
 
 <section
@@ -12,10 +14,16 @@ import RepairCarousel from "./RepairCarousel.astro";
     class="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
     aria-hidden="true"
   >
-    <!-- Imagen de Banner con Opacidad y Desenfoque sutil -->
-    <img
-      src="/reparaciones/banner1.webp"
-      alt=""
+    <!-- Imagen de Banner Optimizada con Astro Image -->
+    <Image
+      src={bannerImg}
+      alt="CyberFix-It Banner"
+      width={1200}
+      height={600}
+      format="webp"
+      quality={70}
+      loading="eager"
+      fetchpriority="high"
       class="h-full w-full object-cover opacity-15 filter blur-[2px]"
     />
 
@@ -29,7 +37,7 @@ import RepairCarousel from "./RepairCarousel.astro";
     >
     </div>
 
-    <!-- Tus Luces/Glows ambientales existentes -->
+    <!-- Luces/Glows ambientales -->
     <div
       class="absolute -top-24 -left-20 h-72 w-72 sm:h-96 sm:w-96 rounded-full bg-dark-purple/40 blur-[100px]"
     >
@@ -84,7 +92,7 @@ import RepairCarousel from "./RepairCarousel.astro";
                 stroke-width="2"
                 d="M5 13l4 4L19 7"></path>
             </svg>
-            Diagnóstico rapido
+            Diagnóstico rápido
           </div>
           <div
             class="flex items-center gap-1.5 rounded-md border border-white/10 bg-white/5 px-3 py-1.5"

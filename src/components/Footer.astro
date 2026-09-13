@@ -29,7 +29,7 @@ const navList = [
       <!-- Columna 1: Marca y descripción -->
       <div class="lg:col-span-4">
         <Logo showTag={true} />
-        <p class="mt-4 max-w-sm text-sm leading-relaxed text-white/60">
+        <p class="mt-4 max-w-sm text-sm leading-relaxed text-white/90">
           Técnico especializado en reparación y mantenimiento de computadoras,
           laptops gamer, consolas y smartphones con garantía por escrito.
         </p>
@@ -37,20 +37,18 @@ const navList = [
         <!-- Métodos de pago aceptados -->
         <div class="mt-5">
           <p
-            class="text-xs font-mono uppercase tracking-wider text-white/40 mb-2"
+            class="text-xs font-mono uppercase tracking-wider text-white/80 mb-2"
           >
             Métodos de pago aceptados:
           </p>
-          <div
-            class="flex flex-wrap gap-2 text-[11px] text-white/70 font-medium"
-          >
-            <span class="rounded bg-white/5 px-2 py-1 border border-white/10"
+          <div class="flex flex-wrap gap-2 text-[11px] text-white font-medium">
+            <span class="rounded bg-white/10 px-2 py-1 border border-white/20"
               >Yappy</span
             >
-            <span class="rounded bg-white/5 px-2 py-1 border border-white/10"
+            <span class="rounded bg-white/10 px-2 py-1 border border-white/20"
               >Efectivo</span
             >
-            <span class="rounded bg-white/5 px-2 py-1 border border-white/10"
+            <span class="rounded bg-white/10 px-2 py-1 border border-white/20"
               >Transferencia</span
             >
           </div>
@@ -64,7 +62,7 @@ const navList = [
         >
           Servicios Técnicos
         </h3>
-        <ul class="mt-4 space-y-2.5 text-sm text-white/60">
+        <ul class="mt-4 space-y-2.5 text-sm text-white/85">
           {
             servicesList.map((item) => (
               <li>
@@ -87,7 +85,7 @@ const navList = [
         >
           Navegación
         </h3>
-        <ul class="mt-4 space-y-2.5 text-sm text-white/60">
+        <ul class="mt-4 space-y-2.5 text-sm text-white/85">
           {
             navList.map((item) => (
               <li>
@@ -110,7 +108,7 @@ const navList = [
         >
           Información y Ubicación
         </h3>
-        <ul class="mt-4 space-y-2.5 text-sm text-white/60">
+        <ul class="mt-4 space-y-2.5 text-sm text-white/85">
           <li class="flex items-start gap-2">
             <span class="text-neon-green">📍</span>
             <span>{SITE.address}, {SITE.city}</span>
@@ -143,7 +141,7 @@ const navList = [
     <div class="circuit-trace mt-12 mb-6"></div>
 
     <div
-      class="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/40 text-center sm:text-left"
+      class="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/80 text-center sm:text-left"
     >
       <p>
         © {year}

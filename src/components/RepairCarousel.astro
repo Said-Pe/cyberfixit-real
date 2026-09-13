@@ -55,12 +55,16 @@ const slides: RepairSlide[] = [
           aria-label={`${slide.title} (${index + 1} de ${slides.length})`}
         >
           {slide.image ? (
-            <!-- Únicamente la Foto -->
+            <!-- Únicamente la Foto Optimizada -->
             <img
               src={slide.image}
               alt={slide.title}
-              class="h-full w-full object-cover"
+              width="800"
+              height="500"
               loading={index === 0 ? 'eager' : 'lazy'}
+              fetchpriority={index === 0 ? 'high' : 'auto'}
+              decoding={index === 0 ? 'sync' : 'async'}
+              class="h-full w-full object-cover"
             />
           ) : (
             <!-- Mensaje simple cuando no hay foto -->
