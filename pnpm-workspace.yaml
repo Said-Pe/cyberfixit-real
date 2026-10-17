@@ -1,3 +1,4 @@
 allowBuilds:
+  bufferutil: false
   esbuild: true
   sharp: true
