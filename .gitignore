@@ -1,6 +1,7 @@
 node_modules
 dist
 .astro
+.vercel
 
 # Variables de entorno — NUNCA subir credenciales al repo
 .env
