@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node ./scripts/fix-vercel-runtime.mjs",
     "preview": "astro preview"
   },
   "dependencies": {
@@ -18,6 +18,6 @@
     "tailwindcss": "^4.0.0"
   },
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=22.0.0"
   }
 }
